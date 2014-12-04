@@ -1,0 +1,127 @@
+﻿<Window x:Class="Firefly.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Firefly - Kinect Controller for Parrot AR.Drone 2.0"
+        Height="830" Width="770" Loaded="WindowLoaded" Closing="WindowClosing">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e"/>
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f"/>
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2"/>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}" x:Key="SquareCheckBox" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <Grid x:Name="SquareCheckBoxChecked">
+                                    <Image x:Name="CheckedNormal" Source="Images\CheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
+                                    <Image x:Name="CheckedHover" Source="Images\CheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                </Grid>
+                                <Grid x:Name="SquareCheckBoxUnchecked" Visibility="Collapsed">
+                                    <Image x:Name="UncheckedNormal" Source="Images\UncheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
+                                    <Image x:Name="UncheckedHover" Source="Images\UncheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                </Grid>
+                                <TextBlock x:Name="SquareCheckBoxText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15"  Margin="9,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="SquareCheckBoxChecked"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="SquareCheckBoxUnchecked"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="CheckedNormal"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="UncheckedNormal"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="CheckedHover"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="UncheckedHover"/>
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="SquareCheckBoxText"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="layoutGrid" Margin="10 0 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftUpButton" Content="Up" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftCenter1Button" Content="Center" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftDownButton" Content="Down" Width="100" IsEnabled="False" Margin="0,0,40,0"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightUpButton" Content="Up" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightCenter1Button" Content="Center" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightDownButton" Content="Down" Width="100" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftLeftButton" Content="Left" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftCenter2Button" Content="Center" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftRightButton" Content="Right" Width="100" IsEnabled="False" Margin="0,0,40,0"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightLeftButton" Content="Left" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightCenter2Button" Content="Center" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightRightButton" Content="Right" Width="100" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftFordwardsButton" Content="Forwards" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftCenter3Button" Content="Center" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftBackwardsButton" Content="Backwards" Width="100" IsEnabled="False"  Margin="0,0,40,0"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightFordwardsButton" Content="Forwards" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightCenter3Button" Content="Center" Width="100" IsEnabled="False"/>
+            <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightBackwardsButton" Content="Backwards" Width="100" IsEnabled="False"/>
+        </StackPanel>
+        <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Center">
+            <Image Name="Image" Width="640" Height="480"/>
+        </Viewbox>
+        <Grid Grid.Row="4" HorizontalAlignment="Center" Margin="0 10">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Last Command Sent to Drone:" Foreground="{DynamicResource KinectBlueBrush}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Press Start to begin" x:Name="CommandTextBlock" Foreground="{DynamicResource KinectPurpleBrush}" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Start" Padding="30 5" x:Name="StartButton" Margin="0 0 40 0" Click="StartButton_Click" />
+                <Button Content="Stop" Padding="30 5" x:Name="StopButton" Margin="0 0 40 0" Click="StopButton_Click" IsEnabled="False" />
+                <Button Content="Hover" Padding="30 5" x:Name="HoverButton" Margin="0 0 40 0" Click="HoverButton_Click" IsEnabled="False" />
+                <Button Content="Emergency" Padding="30 5" x:Name="EmergencyButton" Margin="0 0 40 0" Click="EmergencyButton_Click" />
+                <Button Content="Reset Emergency" Padding="30 5" x:Name="ResetEmergencyButton" Height="28" VerticalAlignment="Bottom" Click="ResetEmergencyButton_Click" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="6">
+            <CheckBox Style="{StaticResource SquareCheckBox}" Content="Seated Mode" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10 10 10" Name="checkBoxSeatedMode" Checked="CheckBoxSeatedModeChanged" Unchecked="CheckBoxSeatedModeChanged"/>
+            <TextBlock Text="Firefly - Kinect Controller for Parrot AR.Drone 2.0" Margin="183,10.667,0.333,13.333" Grid.Row="4" Foreground="{DynamicResource KinectPurpleBrush}" FontWeight="Bold" FontSize="18" HorizontalAlignment="Right"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StatusBar Grid.Column="0" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+                    <StatusBarItem Padding="0 0 0 10">
+                        <TextBlock Name="statusBarText">Click 'Seated' to change skeletal pipeline type!</TextBlock>
+                    </StatusBarItem>
+                </StatusBar>
+                <TextBlock Grid.Column="1">
+                    More info:
+                    <Hyperlink NavigateUri="http://sebastianbrandes.com/2014/12/tutorial-parrot-ar-drone-kinect/" RequestNavigate="Hyperlink_RequestNavigate">
+                        http://sebastianbrandes.com/2014/12/tutorial-parrot-ar-drone-kinect/
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
